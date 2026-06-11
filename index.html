@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Мой AI Агент</title>
+</head>
+<body>
+
+<h1>Чат с агентом</h1>
+
+<input id="msg" placeholder="Введите сообщение">
+<button onclick="send()">Отправить</button>
+
+<div id="result"></div>
+
+<script>
+async function send() {
+    const text = document.getElementById("msg").value;
+
+    const response = await fetch(
+        "https://enjoyer570.app.n8n.cloud/webhook/generate-project",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                message: text
+            })
+        }
+    );
+
+    const data = await response.json();
+
+    document.getElementById("result").innerHTML =
+        "<h3>Ответ:</h3><pre>" +
+        JSON.stringify(data, null, 2) +
+        "</pre>";
+}
+</script>
+
+</body>
+</html>
